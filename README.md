@@ -7,11 +7,15 @@
 
 ## Overview
 
-`diff-immutability-helper` allows you to generate a [immutability-helper](https://www.npmjs.com/package/immutability-helper) compatible changeset between 2 JavaScript variables, which you can use to mutate the base object to the target object.
+`diff-immutability-helper` creates an [immutability-helper](https://www.npmjs.com/package/immutability-helper) compatible diff object between 2 JavaScript variables.
+
+This diff object would then allow you to mutate the base object to the target object.
 
 ## Example
 
 ```js
+  import diff from 'diff-immutability-helper';
+
   const base = {
     a: [1, 2, {b: 1}],
     b: 'test',
@@ -43,6 +47,13 @@ will give a result of:
       d: 'new'
     }
   }
+```
+
+as such, we can achieve
+
+```js
+  import update from 'immutability-helper';
+  update(base, change); // to match target
 ```
 
 

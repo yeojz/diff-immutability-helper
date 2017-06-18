@@ -1,7 +1,7 @@
 {
   "name": "diff-immutability-helper",
   "version": "0.0.0",
-  "description": "Generate a diff between javascript objects, in the format of immutability-helper's mutation object",
+  "description": "Creates a diff between 2 javascript objects / variables, in a format that is compatible with immutability-helper",
   "main": "lib/index.js",
   "repository": "git@github.com:yeojz/diff-immutability-helper.git",
   "author": "Gerald Yeo <contact@fusedthought.com>",
@@ -9,6 +9,7 @@
   "scripts": {
     "build": "rollup -c",
     "clean": "rimraf lib coverage",
+    "coverage": "jest --coverage",
     "lint": "eslint --ext js src tests",
     "test": "jest"
   },

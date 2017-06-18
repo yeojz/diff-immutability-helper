@@ -89,6 +89,14 @@ test('should handle booleans', function() {
   expect(update(base, delta)).toEqual(target);
 });
 
+test('should handle arrays to other types', function() {
+  const base = ['hello', 'world'];
+  const target = 'hello world';
+
+  const delta = diff(base, target);
+  expect(update(base, delta)).toEqual(target);
+});
+
 test('example in readme should generate expected result', () => {
   const base = {
     a: [1, 2, {b: 1}],
