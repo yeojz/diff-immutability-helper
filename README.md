@@ -2,8 +2,9 @@
 
 > Creates a diff between 2 JavaScript objects, allowing you to mutate one object to another using immutability-helper.
 
-[![Build Status][build-badge]][build-link]
 [![npm package][npm-badge]][npm-link]
+[![Build Status][build-badge]][build-link]
+[![Coverage Status][coveralls-badge]][coveralls-link]
 
 ## Overview
 
@@ -79,3 +80,6 @@ yarn add diff-immutability-helper
 
 [build-badge]: https://img.shields.io/circleci/project/github/yeojz/diff-immutability-helper/master.svg?style=flat-square
 [build-link]: https://circleci.com/gh/yeojz/diff-immutability-helper.svg
+
+[coveralls-badge]: https://img.shields.io/coveralls/yeojz/diff-immutability-helper/master.svg?style=flat-square
+[coveralls-link]: https://coveralls.io/github/yeojz/diff-immutability-helper

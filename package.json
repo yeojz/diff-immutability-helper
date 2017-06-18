@@ -10,11 +10,13 @@
     "build": "rollup -c",
     "clean": "rimraf lib coverage",
     "coverage": "jest --coverage",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
     "lint": "eslint --ext js src tests",
     "test": "jest"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
+    "coveralls": "^2.13.1",
     "eslint": "^4.0.0",
     "immutability-helper": "^2.2.2",
     "jest": "^20.0.4",
