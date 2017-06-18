@@ -1,0 +1,20 @@
+machine:
+  node:
+    version: "6"
+  environment:
+    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+general:
+  branches:
+    ignore:
+      - gh-pages
+dependencies:
+  override:
+    - yarn
+  cache_directories:
+    - ~/.cache/yarn
+test:
+  pre:
+    - yarn run clean
+  override:
+    - yarn test
+    - yarn run lint
