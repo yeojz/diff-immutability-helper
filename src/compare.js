@@ -9,7 +9,7 @@ const filterLeafTypes = require('./filterLeafTypes');
 
 function mutateSameKeys(keys, collector, base, target) {
 
-  keys.same.forEach((key) => {
+  keys.forEach((key) => {
     const result = compare(collector[key] || {}, base[key], target[key]);
 
     if (!isEmpty(result)) {
@@ -21,14 +21,14 @@ function mutateSameKeys(keys, collector, base, target) {
 }
 
 function mutateRemovedKeys(keys, collector) {
-  if (size(keys.remove) > 0) {
-    collector.$apply = (obj) => omit(obj, keys.remove);
+  if (size(keys) > 0) {
+    collector.$apply = (obj) => omit(obj, keys);
   }
   return collector;
 }
 
-function setValues(changes, collector, target) {
-    changes.forEach((key) => {
+function setValues(keys, collector, target) {
+    keys.forEach((key) => {
       collector[key] = collector[key] || {};
       collector[key].$set = target[key];
     });
@@ -36,15 +36,15 @@ function setValues(changes, collector, target) {
 }
 
 function mutateAddedKeys(keys, collector, base, target) {
-  if (size(keys.add) < 1) {
+  if (size(keys) < 1) {
     return collector;
   }
 
   if (Array.isArray(base)) {
-    return setValues(keys.add, collector, target);
+    return setValues(keys, collector, target);
   }
 
-  const added = pick(keys.target, keys.add);
+  const added = pick(target, keys);
   collector.$merge = added;
   return collector;
 }
@@ -59,17 +59,14 @@ function compare(collector, base, target) {
   const baseKeys = Object.keys(base);
   const targetKeys = Object.keys(target);
 
-  const keys = {
-    add: difference(targetKeys, baseKeys),
-    base: baseKeys,
-    remove: difference(baseKeys, targetKeys),
-    same: intersection(baseKeys, targetKeys),
-    target: targetKeys
-  }
+  const add = difference(targetKeys, baseKeys);
+  const remove = difference(baseKeys, targetKeys);
+  const same = intersection(baseKeys, targetKeys);
 
-  collector = mutateSameKeys(keys, collector, base, target);
-  collector = mutateRemovedKeys(keys, collector);
-  collector = mutateAddedKeys(keys, collector, base, target);
+  collector = mutateSameKeys(same, collector, base, target);
+  collector = mutateRemovedKeys(remove, collector);
+  collector = mutateAddedKeys(add, collector, base, target);
+
   return collector;
 }
 
