@@ -1,7 +1,7 @@
-const compare = require('./compare');
+import compare from './compare';
 
 function diff(base, target) {
   return compare({}, base, target)
 }
 
-module.exports = diff;
+export default diff;

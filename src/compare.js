@@ -1,16 +1,21 @@
-const difference = require('lodash/difference');
-const intersection = require('lodash/intersection');
-const isEmpty = require('lodash/isEmpty');
-const omit = require('lodash/omit');
-const pick = require('lodash/pick');
-const size = require('lodash/size');
+import difference from 'lodash/difference';
+import intersection from 'lodash/intersection';
+import isEmpty from 'lodash/isEmpty';
+import omit from 'lodash/omit';
+import pick from 'lodash/pick';
+import size from 'lodash/size';
+import filterLeafTypes from './filterLeafTypes';
 
-const filterLeafTypes = require('./filterLeafTypes');
+function compareSameKeys(collector, values) {
 
-function mutateSameKeys(keys, collector, base, target) {
+  const keysToCompare = intersection(values.baseKeys, values.targetKeys);
 
-  keys.forEach((key) => {
-    const result = compare(collector[key] || {}, base[key], target[key]);
+  keysToCompare.forEach((key) => {
+    const result = compare(
+      collector[key] || {},
+      values.base[key],
+      values.target[key]
+    );
 
     if (!isEmpty(result)) {
       collector[key] = result;
@@ -20,9 +25,11 @@ function mutateSameKeys(keys, collector, base, target) {
   return collector;
 }
 
-function mutateRemovedKeys(keys, collector) {
-  if (size(keys) > 0) {
-    collector.$apply = (obj) => omit(obj, keys);
+function removeKeys(collector, values) {
+  const keysToRemove = difference(values.baseKeys, values.targetKeys);
+
+  if (size(keysToRemove) > 0) {
+    collector.$apply = (obj) => omit(obj, keysToRemove);
   }
   return collector;
 }
@@ -35,16 +42,18 @@ function setValues(keys, collector, target) {
     return collector;
 }
 
-function mutateAddedKeys(keys, collector, base, target) {
-  if (size(keys) < 1) {
+function addKeys(collector, values) {
+  const keysToAdd = difference(values.targetKeys, values.baseKeys);
+
+  if (size(keysToAdd) < 1) {
     return collector;
   }
 
-  if (Array.isArray(base)) {
-    return setValues(keys, collector, target);
+  if (Array.isArray(values.base)) {
+    return setValues(keysToAdd, collector, values.target);
   }
 
-  const added = pick(target, keys);
+  const added = pick(values.target, keysToAdd);
   collector.$merge = added;
   return collector;
 }
@@ -56,18 +65,18 @@ function compare(collector, base, target) {
     return filters.collector;
   }
 
-  const baseKeys = Object.keys(base);
-  const targetKeys = Object.keys(target);
+  const values = {
+    base,
+    target,
+    baseKeys: Object.keys(base),
+    targetKeys: Object.keys(target),
+  }
 
-  const add = difference(targetKeys, baseKeys);
-  const remove = difference(baseKeys, targetKeys);
-  const same = intersection(baseKeys, targetKeys);
-
-  collector = mutateSameKeys(same, collector, base, target);
-  collector = mutateRemovedKeys(remove, collector);
-  collector = mutateAddedKeys(add, collector, base, target);
+  collector = compareSameKeys(collector, values);
+  collector = removeKeys(collector, values);
+  collector = addKeys(collector, values);
 
   return collector;
 }
 
-module.exports = compare;
+export default compare;

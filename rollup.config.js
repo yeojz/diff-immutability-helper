@@ -1,5 +1,3 @@
-import commonjs from 'rollup-plugin-commonjs';
-
 export default {
   entry: './src/index.js',
   dest: 'lib/index.js',
@@ -22,8 +20,5 @@ export default {
     'lodash/omit': '_.omit',
     'lodash/pick': '_.pick',
     'lodash/size': '_.size'
-  },
-  plugins: [
-    commonjs()
-  ]
+  }
 };

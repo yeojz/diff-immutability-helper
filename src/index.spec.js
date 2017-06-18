@@ -1,6 +1,6 @@
-const omit = require('lodash/omit');
-const update = require('immutability-helper');
-const diff = require('./index');
+import omit from 'lodash/omit';
+import update from 'immutability-helper';
+import diff from './index';
 
 test('should handle simple push', function() {
   const base = [1, 2, 3];
@@ -118,6 +118,6 @@ test('example in readme should generate expected result', () => {
     }
   }
 
-  expect(update(base, delta2)).toEqual(target);
   expect(update(base, delta)).toEqual(target);
+  expect(update(base, delta2)).toEqual(target);
 })

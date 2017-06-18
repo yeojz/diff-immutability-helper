@@ -1,4 +1,4 @@
-const isNil = require('lodash/isNil');
+import isNil from 'lodash/isNil';
 
 const PRIMITIVE_TYPES = [
   'string',
@@ -38,4 +38,4 @@ function filterLeafTypes(collector, base, target) {
   return {};
 }
 
-module.exports = filterLeafTypes;
+export default filterLeafTypes;
