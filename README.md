@@ -1,6 +1,6 @@
 # diff-immutability-helper
 
-> Creates a diff between 2 JavaScript objects, allowing you to mutate one object to another using immutability-helper.
+> Creates a diff between 2 JavaScript objects, allowing you to mutate one object to another using immutability-helper
 
 [![npm package][npm-badge]][npm-link]
 [![Build Status][build-badge]][build-link]
@@ -12,7 +12,15 @@
 
 This diff object would then allow you to mutate the base object to the target object.
 
+## Installation
+
+```
+$ npm install diff-immutability-helper --save
+```
+
 ## Example
+
+Given:
 
 ```js
   import diff from 'diff-immutability-helper';
@@ -50,24 +58,11 @@ will give a result of:
   }
 ```
 
-as such, we can achieve
+thus, we can then do:
 
 ```js
   import update from 'immutability-helper';
   update(base, change); // to match target
-```
-
-
-## Installation
-
-Install the library:
-
-```
-npm install diff-immutability-helper --save
-
-// or
-
-yarn add diff-immutability-helper
 ```
 
 

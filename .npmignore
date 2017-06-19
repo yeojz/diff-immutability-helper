@@ -1,6 +1,9 @@
+.babelrc
+.editorconfig
 .eslintrc.json
 .gitignore
+.travis.yml
+circle.yml
 node_modules
-src
-testing.js
 rollup.config.js
+src
