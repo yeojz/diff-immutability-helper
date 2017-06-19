@@ -26,13 +26,13 @@ Given:
   import diff from 'diff-immutability-helper';
 
   const base = {
-    a: [1, 2, {b: 1}],
+    a: [1, 2, { b: 1 }, 4, 5, 6],
     b: 'test',
     c: 'prev'
   };
 
   const target = {
-    a: [1, 2, {b: 2}, 4],
+    a: [1, 2, { b: 2 }, 4, 6],
     b: 'test 2',
     d: 'new'
   };
@@ -45,10 +45,7 @@ will give a result of:
 ```js
   const change = {
     a: {
-      '2': {
-        b: {$set: 2}
-      },
-      '3': {$set: 4}
+      $splice: [[4, 1], [2, 1, { b: 2 }]]
     },
     b: {$set: 'test 2'},
     $apply: (v) => omit(v, ['c']),
@@ -65,6 +62,10 @@ thus, we can then do:
   update(base, change); // to match target
 ```
 
+## Notes
+
+-   Array diffing uses [LCS](https://en.wikipedia.org/wiki/Longest_common_subsequence_problem)
+-   Only CommonJS format (for node.js) is provided. This is to minimize library size when you bundle with your application.
 
 ## License
 

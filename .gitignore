@@ -1,8 +1,10 @@
+
 *.log
 *.pid
 *.pid.lock
 *.seed
 *.tgz
+.DS_Store
 .env
 .eslintcache
 .grunt

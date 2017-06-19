@@ -11,10 +11,12 @@ test('should handle simple push', function() {
 
 test('should handle nested collections', function() {
   const base = {
-    z: [1, 2, { a: [12, 17, 15] }]
+    a: [1, 2, { b: [12, 17, 15] }],
+    b: [1, 2]
   };
   const target = {
-    z: [1, 2, { a: [12, 13, 14, 15] }]
+    a: [1, 2, { b: [12, 13, 14, 15] }],
+    b: [1, 2]
   };
 
   const delta = diff(base, target);
@@ -99,13 +101,13 @@ test('should handle arrays to other types', function() {
 
 test('example in readme should generate expected result', () => {
   const base = {
-    a: [1, 2, {b: 1}],
+    a: [1, 2, { b: 1 }, 4, 5, 6],
     b: 'test',
     c: 'prev'
   };
 
   const target = {
-    a: [1, 2, {b: 2}, 4],
+    a: [1, 2, { b: 2 }, 4, 6],
     b: 'test 2',
     d: 'new'
   };
@@ -114,18 +116,15 @@ test('example in readme should generate expected result', () => {
 
   const delta2 = {
     a: {
-      '2': {
-        b: {$set: 2}
-      },
-      '3': {$set: 4}
+      $splice: [[4, 1], [2, 1, { b: 2 }]]
     },
-    b: {$set: 'test 2'},
-    $apply: (v) => omit(v, ['c']),
+    b: { $set: 'test 2' },
+    $apply: v => omit(v, ['c']),
     $merge: {
       d: 'new'
     }
-  }
+  };
 
   expect(update(base, delta)).toEqual(target);
   expect(update(base, delta2)).toEqual(target);
-})
+});
