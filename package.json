@@ -11,7 +11,6 @@
     "clean": "rimraf lib coverage",
     "coverage": "jest --coverage",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "codecov": "codecov",
     "lint": "eslint --ext js src tests",
     "test": "jest"
   },
@@ -37,7 +36,6 @@
   },
   "dependencies": {
     "adiff": "^0.2.13",
-    "codecov": "^2.2.0",
     "lodash": "^4.17.4"
   }
 }
