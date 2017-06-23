@@ -4,7 +4,7 @@
 
 [![npm package][npm-badge]][npm-link]
 [![Build Status][build-badge]][build-link]
-[![Coverage Status][coveralls-badge]][coveralls-link]
+[![Coverage Status][codecov-badge]][codecov-link]
 
 ## Overview
 
@@ -77,5 +77,5 @@ thus, we can then do:
 [build-badge]: https://img.shields.io/circleci/project/github/yeojz/diff-immutability-helper/master.svg?style=flat-square
 [build-link]: https://circleci.com/gh/yeojz/diff-immutability-helper.svg
 
-[coveralls-badge]: https://img.shields.io/coveralls/yeojz/diff-immutability-helper/master.svg?style=flat-square
-[coveralls-link]: https://coveralls.io/github/yeojz/diff-immutability-helper
+[codecov-badge]: https://img.shields.io/codecov/c/github/yeojz/diff-immutability-helper/master.svg?style=flat-square
+[codecov-link]: https://codecov.io/gh/yeojz/diff-immutability-helper

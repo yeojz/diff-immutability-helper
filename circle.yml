@@ -18,6 +18,7 @@ test:
   override:
     - yarn run coverage
     - yarn run lint
+    - yarn run codecov
 deployment:
   coverage:
     branch: master
