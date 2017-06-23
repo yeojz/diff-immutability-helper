@@ -18,11 +18,8 @@ test:
   override:
     - yarn run coverage
     - yarn run lint
+    - yarn run coverage:upload
 deployment:
-  coverage:
-    branch: master
-    commands:
-      - yarn run coveralls
   release:
     tag: /^v[0-9]+(\.[0-9]+)*$/
     owner: yeojz
