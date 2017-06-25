@@ -15,7 +15,7 @@ This diff object would then allow you to mutate the base object to the target ob
 ## Installation
 
 ```
-$ npm install diff-immutability-helper --save
+$> npm install diff-immutability-helper
 ```
 
 ## Example
@@ -65,7 +65,6 @@ thus, we can then do:
 ## Notes
 
 -   Array diffing uses [LCS](https://en.wikipedia.org/wiki/Longest_common_subsequence_problem)
--   Only CommonJS format (for node.js) is provided. This is to minimize library size when you bundle with your application.
 
 ## License
 
