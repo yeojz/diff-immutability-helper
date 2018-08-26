@@ -12,7 +12,8 @@
     "clean": "rimraf lib coverage",
     "coverage": "jest --coverage",
     "codecov": "codecov",
-    "lint": "eslint --ext js src tests",
+    "lint": "eslint \"src/**/**?(.spec|).js\"",
+    "lint:format": "prettier --write \"{src,scripts}/**/**.js\"",
     "test": "jest"
   },
   "keywords": [
