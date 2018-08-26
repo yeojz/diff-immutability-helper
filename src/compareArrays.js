@@ -1,4 +1,4 @@
-import {diff} from 'adiff';
+import { diff } from 'adiff';
 
 function compareArrays(collector, base, target) {
   const changes = diff(base, target);

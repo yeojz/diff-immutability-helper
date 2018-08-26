@@ -6,10 +6,9 @@ import pick from 'lodash/pick';
 import size from 'lodash/size';
 
 function compareSameKeys(collector, values, compare) {
-
   const keysToCompare = intersection(values.baseKeys, values.targetKeys);
 
-  keysToCompare.forEach((key) => {
+  keysToCompare.forEach(key => {
     const result = compare(
       collector[key] || {},
       values.base[key],
@@ -28,7 +27,7 @@ function removeKeys(collector, values) {
   const keysToRemove = difference(values.baseKeys, values.targetKeys);
 
   if (size(keysToRemove) > 0) {
-    collector.$apply = (obj) => omit(obj, keysToRemove);
+    collector.$apply = obj => omit(obj, keysToRemove);
   }
   return collector;
 }
@@ -50,8 +49,8 @@ function compareObjects(collector, base, target, compare) {
     base,
     target,
     baseKeys: Object.keys(base),
-    targetKeys: Object.keys(target),
-  }
+    targetKeys: Object.keys(target)
+  };
 
   collector = compareSameKeys(collector, values, compare);
   collector = removeKeys(collector, values);
