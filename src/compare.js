@@ -3,7 +3,6 @@ import compareObjects from './compareObjects';
 import filterLeafTypes from './filterLeafTypes';
 
 function compare(collector, base, target) {
-
   const filters = filterLeafTypes(collector, base, target);
 
   if (filters.hasOwnProperty('collector')) {
