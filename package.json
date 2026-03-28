@@ -1,46 +1,59 @@
 {
   "name": "diff-immutability-helper",
-  "version": "1.1.0",
-  "description": "Creates a diff between 2 javascript objects / variables, in a format that is compatible with immutability-helper",
-  "main": "./lib/index.js",
-  "module": "./lib/index.esm.js",
+  "version": "2.0.0",
+  "description": "Creates an RFC 6902 JSON Patch diff between 2 JavaScript objects using LCS-based array diffing",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "repository": "git@github.com:yeojz/diff-immutability-helper.git",
   "author": "Gerald Yeo <contact@fusedthought.com>",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c",
-    "clean": "rimraf lib coverage",
-    "coverage": "jest --coverage",
-    "codecov": "codecov",
-    "lint": "eslint \"src/**/**?(.spec|).js\"",
-    "lint:format": "prettier --write \"{src,scripts}/**/**.js\"",
-    "test": "jest"
+    "build": "tsup",
+    "clean": "rm -rf dist coverage",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "bench": "vitest bench"
   },
   "keywords": [
     "diff",
     "json",
-    "immutability",
-    "immutable",
+    "json-patch",
+    "rfc6902",
     "changeset",
-    "object"
+    "object",
+    "lcs"
   ],
-  "jest": {
-    "coverageDirectory": "./coverage/"
+  "engines": {
+    "node": ">=24"
   },
   "devDependencies": {
-    "babel-preset-env": "^1.7.0",
-    "codecov": "^3.0.4",
-    "eslint": "^5.4.0",
-    "eslint-config-prettier": "^3.0.1",
-    "eslint-plugin-prettier": "^2.6.2",
-    "immutability-helper": "^2.7.1",
-    "jest": "^23.5.0",
-    "prettier": "^1.14.2",
-    "rimraf": "^2.6.2",
-    "rollup": "^0.65.0"
-  },
-  "dependencies": {
-    "adiff": "^0.2.13",
-    "lodash": "^4.17.10"
+    "@types/node": "^25.2.3",
+    "eslint": "^10.0.0",
+    "fast-json-patch": "^3.1.1",
+    "immutability-helper": "^3.1.1",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.0",
+    "vitest": "^4.0.18"
   }
 }
